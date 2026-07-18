@@ -1,4 +1,4 @@
-# ⚡ GameOptimizerPro v1.1
+# ⚡ GameOptimizerPro v1.2
 
 > **Windows & Gaming Optimizer** — by FloDePin
 
@@ -39,7 +39,7 @@ The tool offers a modern, user-friendly interface with:
 
 | Tab | Features | Description |
 |-----|----------|-------------|
-| 🪟 Windows | 22 Tweaks | Debloat, privacy, Win11 tweaks, performance tweaks + CTT Essentials |
+| 🪟 Windows | 22 Tweaks | Debloat, privacy, Win11 tweaks, performance tweaks + **7 new CTT Essentials** |
 | 🌐 Network | 10 Tweaks | Nagle, LSO, DNS, TCP tuning, QoS, adapter power saving, delivery optimization + live ping test |
 | 🔊 Audio | 6 Tweaks | Audio tweaks, dedicated tab |
 | 🎮 GPU Tweaks | 7 Tweaks | 4 NVIDIA + 3 AMD tweaks, GPU detection, brand grey-out |
@@ -51,7 +51,7 @@ The tool offers a modern, user-friendly interface with:
 
 ---
 
-## 🪟 Windows Tab - 15 Tweaks
+## 🪟 Windows Tab - 22 Tweaks
 
 ### 🧹 Debloat & System Cleanup
 - **Remove Cortana** — Completely removes Windows' voice assistant
@@ -71,10 +71,22 @@ The tool offers a modern, user-friendly interface with:
 - **Win11 Tweaks** — Specialized optimizations for Windows 11
 - **Win10 Grey-out + Banner** — Optimized display for Windows 10 compatibility
 
-### ⚡ Performance Tweaks (NEW in v1.1)
+### ⚡ Performance Tweaks (v1.1+)
 - **Disable Power Throttling** — Prevents Windows from throttling gaming processes via EcoQoS
 - **Disable Bing in Windows Search** — Start menu searches only locally, no data exchange with Microsoft
 - **Process Count Reduction (Svchost)** — Fewer background processes via an increased split threshold
+
+### 🎯 CTT Essentials (NEW in v1.2.0)
+Registry keys sourced **1:1 from Chris Titus Tech WinUtil** for guaranteed accuracy:
+- **Prevent Device Companion Apps** — Blocks device metadata downloads + auto-suggested companion apps
+- **Disable Consumer Features** — Stops auto-installed suggested apps/games in the Start menu
+- **Disable Windows Platform Binary Table (WPBT)** — Blocks OEM firmware from injecting programs at boot (Security hardening)
+- **Disable Store Recommended Search Results** — Removes sponsored results in the Microsoft Store
+- **Enable Start Menu Previous Layout** — Classic Start layout on supported Win11 builds
+- **Disable File Explorer Automatic Folder Discovery** — Opens large folders faster
+- **Run Disk Cleanup** — Automated cleanmgr + DISM component cleanup
+
+**All 7 tweaks include:** Full Apply/Revert functionality + Status checks + EN/DE descriptions
 
 ---
 
@@ -194,7 +206,7 @@ The tool offers a modern, user-friendly interface with:
 ## 🛡️ Safety & Security
 
 ✅ **System Restore Point** — Automatically created before any tweaks are applied  
-✅ **Registry Backup** — Before every Apply/Revert, all affected registry keys are additionally exported as `.reg` files to `%TEMP%\GameOptimizerPro_Backups\` (independent of the System Restore Point, which is subject to Windows' 24h limit)  
+✅ **Registry Backup** — Before every Apply/Revert, all affected registry keys are additionally exported as `.reg` files to `%TEMP%\GameOptimizerPro_Backups\` (independent of the System Restore Point limit)  
 ✅ **Detailed Logging** — All actions are logged to `%TEMP%\GameOptimizerPro_*.log`  
 ✅ **Hardware Detection** — GPU-specific tweaks are filtered automatically  
 ✅ **BIOS Guide Read-Only** — No automatic system changes from the BIOS tab  
@@ -259,7 +271,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ## 📜 Changelog
 
 ### v1.2.0 ⭐ **CURRENT**
-- 🧰 **7 new "CTT Essentials" tweaks** in the Windows tab (parity with Chris Titus Tech WinUtil), each with Apply/Revert/status-check:
+- 🧰 **7 new "CTT Essentials" tweaks** in the Windows tab (parity with Chris Titus Tech WinUtil), each with full Apply/Revert/Status-Check:
   - **Prevent Device Companion Apps** — blocks device metadata downloads + auto-suggested companion apps
   - **Disable Consumer Features** — stops auto-installed suggested apps/games in the Start menu
   - **Disable Windows Platform Binary Table (WPBT)** — blocks OEM firmware from injecting programs at boot
@@ -267,12 +279,17 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
   - **Enable Start Menu Previous Layout** — classic Start layout on supported Win11 builds
   - **Disable File Explorer Automatic Folder Discovery** — opens large folders faster
   - **Run Disk Cleanup** — automated cleanmgr + DISM component cleanup
-- 📇 Registry keys sourced 1:1 from the upstream CTT WinUtil config for accuracy
+- 📇 Registry keys sourced **1:1 from the upstream CTT WinUtil config** for accuracy
+- 🪟 **Windows Tab: 15 → 22 Tweaks** (7 new CTT Essentials added)
+- ✅ **92/92 Tweaks verified:** All have Apply + Revert + Status-Check (no gaps, no duplicates, no orphans)
+- 🔒 **Sanity-Check:** No Check/Revert/Action collisions detected
+- 🔐 Version 1.2.0 checksum updated in `install.ps1` + `CHECKSUMS.txt`
+- 🔗 End-to-End integrity chain intact: Live-Raw-Hash = Installer-Pin (B7406760…2FEA)
 
 ### v1.1.1
 - 🐛 **Bugfix:** 3 tweaks (Power Throttling, Bing Search, Svchost Reduction) were silently undone automatically on every program start due to a copy-paste error — fixed
-- 🌍 **Bugfix (Localization):** On non-English Windows (e.g. German), the status check for "Disable TCP Auto-Tuning" always returned "unknown" instead of the real status (the netsh text search was hardcoded to English) — now locale-independent via `Get-NetTCPSetting`
-- 🌍 **Bugfix (Localization):** "Revert All" could never find the "Balanced" power plan on German Windows ("Ausbalanciert") and logged the revert as successful even though nothing happened — now resolved via the fixed, locale-independent Windows GUID
+- 🌍 **Bugfix (Localization):** On non-English Windows (e.g. German), the status check for "Disable TCP Auto-Tuning" always returned "unknown" instead of the real status
+- 🌍 **Bugfix (Localization):** "Revert All" could never find the "Balanced" power plan on German Windows and logged the revert as successful even though nothing happened
 - 🛡️ **Startup Sanity Check** — Automatically detects if a status check is ever again accidentally identical to a revert action
 - 💾 **Registry Backup** — Before every Apply/Revert, affected registry keys are additionally backed up as `.reg` files (independent of the System Restore Point limit)
 - 🔒 **Checksum Verification** — `install.ps1` checks the download against `CHECKSUMS.txt`
